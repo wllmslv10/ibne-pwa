@@ -1,9 +1,9 @@
-const CACHE_NAME = 'ibne-pwa-shell-v1';
+const CACHE_NAME = 'ibne-pwa-shell-v2';
 const APP_SHELL = [
   './',
   './index.html',
   './manifest.webmanifest',
-  './icons/icon.svg'
+  './icons/icone-ibne.png'
 ];
 
 self.addEventListener('install', (event) => {
