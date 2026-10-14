@@ -12,6 +12,19 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Escala IBNE">
   <title>Escala de Mídia IBNE</title>
+  <script>
+    // Quando aberto como aplicativo instalado, encaminha direto ao app oficial.
+    // Em uma aba comum, mantém a página com as opções de instalação.
+    (function () {
+      const isStandalone =
+        window.matchMedia('(display-mode: standalone)').matches ||
+        window.matchMedia('(display-mode: window-controls-overlay)').matches ||
+        window.navigator.standalone === true;
+      if (isStandalone) {
+        window.location.replace('https://escala-midia-ibne.streamlit.app/');
+      }
+    })();
+  </script>
   <style>
     :root { color-scheme: dark; --navy:#102744; --navy2:#173b62; --gold:#e8bd62; --text:#f5f7fb; --muted:#c5d2e1; }
     * { box-sizing:border-box; }
