@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ibne-pwa-shell-v11';
+const CACHE_NAME = 'ibne-pwa-shell-v12';
 const APP_SHELL = [
   './',
   './index.html',
