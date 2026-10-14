@@ -8,14 +8,14 @@
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#102744",
-  "theme_color": "#102744",
+  "background_color": "#123e70",
+  "theme_color": "#123e70",
   "icons": [
     {
       "src": "./icons/icone-ibne-app.svg",
       "sizes": "any",
       "type": "image/svg+xml",
-      "purpose": "any"
+      "purpose": "any maskable"
     }
   ]
 }
