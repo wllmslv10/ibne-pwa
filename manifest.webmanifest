@@ -12,7 +12,7 @@
   "theme_color": "#123e70",
   "icons": [
     {
-      "src": "./icons/icone-ibne-app-v3.svg?v=12",
+      "src": "./icons/icone-ibne-app-v3.svg?v=13",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any maskable"
