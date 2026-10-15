@@ -13,9 +13,14 @@
   <meta name="apple-mobile-web-app-title" content="Escala IBNE">
   <title>Escala de Mídia IBNE</title>
   <script>
-    // O endereço principal abre a aplicação oficial. Acrescente ?instalar=1
-    // ao endereço do PWA para consultar a página de instalação/informações.
-    if (!new URLSearchParams(window.location.search).has('instalar')) {
+    // O acesso normal continua abrindo diretamente o aplicativo oficial.
+    // ?instalar=1 exibe a página de instalação; ?teste-faixa=1 é um teste isolado
+    // para avaliar o app dentro da janela PWA sem navegação fora do escopo.
+    const pwaParams = new URLSearchParams(window.location.search);
+    if (pwaParams.has('teste-faixa')) {
+      document.documentElement.classList.add('teste-embed');
+      document.querySelector('link[rel="manifest"]').href = './manifest-teste.webmanifest';
+    } else if (!pwaParams.has('instalar')) {
       window.location.replace('https://escala-midia-ibne.streamlit.app/');
     }
   </script>
@@ -35,6 +40,10 @@
     .hint { font-size:.88rem; margin-top:22px; margin-bottom:0; }
     footer { margin-top:22px; color:#9fb1c5; font-size:.78rem; }
     @media (prefers-reduced-motion:no-preference) { main { animation:appear .45s ease-out; } @keyframes appear { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } } }
+    /* Modo experimental, ativado somente por ?teste-faixa=1. */
+    html.teste-embed, html.teste-embed body { width:100%; height:100%; min-height:100%; margin:0; padding:0; overflow:hidden; background:#123e70; display:block; }
+    html.teste-embed body > main { display:none; }
+    html.teste-embed body > iframe.ibne-app-test { display:block; position:fixed; inset:0; width:100%; height:100%; border:0; margin:0; padding:0; background:#123e70; }
   </style>
 </head>
 <body>
@@ -49,6 +58,14 @@
     <footer>Versão inicial de acesso • O aplicativo oficial permanece separado.</footer>
   </main>
   <script>
+    if (new URLSearchParams(window.location.search).has('teste-faixa')) {
+      const appFrame = document.createElement('iframe');
+      appFrame.className = 'ibne-app-test';
+      appFrame.title = 'Aplicativo oficial Escala de Mídia IBNE — teste visual';
+      appFrame.src = 'https://escala-midia-ibne.streamlit.app/?embed=true';
+      appFrame.allow = 'clipboard-read; clipboard-write; fullscreen';
+      document.body.appendChild(appFrame);
+    }
     let installPrompt;
     const installButton = document.getElementById('install');
     window.addEventListener('beforeinstallprompt', (event) => {
