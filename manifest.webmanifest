@@ -1,0 +1,21 @@
+{
+  "id": "./",
+  "name": "Escala de Mídia IBNE",
+  "short_name": "Escala IBNE",
+  "description": "Acesso rápido à Escala de Mídia da Igreja Batista Nova Esperança.",
+  "lang": "pt-BR",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#123e70",
+  "theme_color": "#123e70",
+  "icons": [
+    {
+      "src": "./icons/icone-ibne-app-v3.svg?v=13",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
