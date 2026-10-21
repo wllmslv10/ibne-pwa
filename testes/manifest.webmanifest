@@ -8,14 +8,7 @@
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "theme_color": "#123b70",
-  "background_color": "#eef3f9",
-  "icons": [
-    {
-      "src": "./icone.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
-    }
-  ]
+  "theme_color": "#123e70",
+  "background_color": "#123e70",
+  "icons": [{"src":"../icons/icone-ibne-app-v3.svg?v=14","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
 }
