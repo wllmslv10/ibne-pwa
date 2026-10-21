@@ -4,7 +4,7 @@
   "short_name": "IBNE Testes",
   "description": "Acesso de testes da Escala de Mídia IBNE",
   "lang": "pt-BR",
-  "start_url": "./",
+  "start_url": "./?abrir=app",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
