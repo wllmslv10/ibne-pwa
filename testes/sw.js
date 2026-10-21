@@ -1,5 +1,5 @@
-const CACHE_NAME="ibne-pwa-testes-v2";
-const ASSETS=["./","./index.html","./manifest.webmanifest","../icons/icone-ibne-app-v3.svg?v=14"];
+const CACHE_NAME="ibne-pwa-testes-v3";
+const ASSETS=["./","./index.html","./manifest.webmanifest","../icons/icone-ibne-app-v3.svg?v=15"];
 self.addEventListener("install",event=>{event.waitUntil(caches.open(CACHE_NAME).then(cache=>cache.addAll(ASSETS)).then(()=>self.skipWaiting()));});
 self.addEventListener("activate",event=>{event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key.startsWith("ibne-pwa-testes-")&&key!==CACHE_NAME).map(key=>caches.delete(key)))).then(()=>self.clients.claim()));});
 self.addEventListener("fetch",event=>{const req=event.request,url=new URL(req.url);if(req.method!=="GET"||url.origin!==self.location.origin)return;event.respondWith(caches.match(req).then(cached=>cached||fetch(req).then(res=>{if(res.ok&&res.type==="basic")caches.open(CACHE_NAME).then(cache=>cache.put(req,res.clone()));return res;})));});
