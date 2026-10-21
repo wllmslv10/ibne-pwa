@@ -1,4 +1,4 @@
-const CACHE_NAME="ibne-pwa-testes-v4";
+const CACHE_NAME="ibne-pwa-testes-v5";
 const CACHE_PREFIX="ibne-pwa-testes-";
 const ASSETS=["./","./index.html","./manifest.webmanifest","../icons/icone-ibne-app-v3.svg?v=16"];
 self.addEventListener("install",event=>{event.waitUntil(caches.open(CACHE_NAME).then(cache=>cache.addAll(ASSETS)).then(()=>self.skipWaiting()));});
