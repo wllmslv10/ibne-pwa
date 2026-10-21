@@ -5,6 +5,17 @@
 <meta name="theme-color" content="#123E70"><meta name="description" content="Instalador da versão de testes da Escala de Mídia IBNE.">
 <link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="../icons/icone-ibne-app-v3.svg?v=16" type="image/svg+xml"><link rel="apple-touch-icon" href="../icons/icone-ibne.png">
 <meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="IBNE Testes">
+<script>
+(function(){
+  var standalone=window.matchMedia('(display-mode: standalone)').matches||
+    window.matchMedia('(display-mode: fullscreen)').matches||
+    window.navigator.standalone===true;
+  if(standalone){
+    document.documentElement.style.visibility='hidden';
+    window.location.replace('https://ibne-escala-midia-teste.streamlit.app/');
+  }
+})();
+</script>
 <title>Instalar Escala de Mídia IBNE — Testes</title>
 <style>
 *{box-sizing:border-box}body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(135deg,#123E70,#2475D8);color:#17304F}
@@ -25,9 +36,6 @@ h1{color:#123E70;font-size:25px;line-height:1.3;margin:0 0 14px}
 <p id="orientacao" role="status"></p><div class="rodape">Igreja Batista Nova Esperança — IBNE · Ambiente de testes</div>
 </main>
 <script>
-const URL_APP_TESTES='https://ibne-escala-midia-teste.streamlit.app/';
-const instaladoComoApp=window.matchMedia('(display-mode: standalone)').matches||window.matchMedia('(display-mode: fullscreen)').matches||window.navigator.standalone===true;
-if(instaladoComoApp){window.location.replace(URL_APP_TESTES);}
 let promptInstalacao=null;const botao=document.getElementById('instalar');const orientacao=document.getElementById('orientacao');
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();promptInstalacao=e;});
 botao.addEventListener('click',async()=>{if(promptInstalacao){promptInstalacao.prompt();await promptInstalacao.userChoice;promptInstalacao=null;return;}orientacao.style.display='block';orientacao.textContent='No Microsoft Edge, abra o menu ⋯ no canto superior direito e procure “Aplicativos” > “Instalar este site como aplicativo”. Se essa opção não aparecer, o navegador ainda não reconheceu a instalação deste site.';});
