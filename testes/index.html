@@ -1,113 +1,32 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#123E70">
-    <meta name="description" content="Instalador da versão de testes da Escala de Mídia IBNE.">
-    <title>Instalar Escala de Mídia IBNE — Testes</title>
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            font-family: Arial, Helvetica, sans-serif;
-            background: linear-gradient(135deg, #123E70, #2475D8);
-            color: #17304F;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 420px;
-            padding: 32px 24px;
-            background: #FFFFFF;
-            border-radius: 24px;
-            text-align: center;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
-        }
-
-        .logo {
-            display: block;
-            width: 140px;
-            height: 140px;
-            margin: 0 auto 22px;
-            object-fit: contain;
-        }
-
-        h1 {
-            color: #123E70;
-            font-size: 25px;
-            line-height: 1.3;
-            margin: 0 0 14px;
-        }
-
-        .descricao {
-            font-size: 16px;
-            line-height: 1.6;
-            margin: 0 0 24px;
-            color: #475569;
-        }
-
-        .botao {
-            display: block;
-            padding: 17px 14px;
-            border-radius: 14px;
-            background: #1557B0;
-            color: #FFFFFF;
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: bold;
-            line-height: 1.4;
-            transition: background 0.2s, transform 0.2s;
-        }
-
-        .botao:hover {
-            background: #0D438F;
-            transform: translateY(-2px);
-        }
-
-        .rodape {
-            margin-top: 24px;
-            font-size: 12px;
-            color: #64748B;
-        }
-    </style>
-</head>
-
-<body>
-    <main class="container">
-        <img
-            class="logo"
-            src="https://raw.githubusercontent.com/wllmslv10/ibne-pwa/pwa-setup/icons/icone-ibne-app-v3.svg"
-            alt="Logotipo da Igreja Batista Nova Esperança"
-        >
-
-        <h1>Instalar Escala de Mídia IBNE — Testes</h1>
-
-        <p class="descricao">
-            Acesse com facilidade a versão de testes do aplicativo da equipe de mídia
-            da Igreja Batista Nova Esperança.
-        </p>
-
-        <a
-            class="botao"
-            href="https://ibne-escala-midia-teste.streamlit.app/"
-            target="_blank"
-            rel="noopener noreferrer"
-        >
-            🔵 ABRIR ESCALA DE MÍDIA IBNE — TESTES
-        </a>
-
-        <div class="rodape">
-            Igreja Batista Nova Esperança — IBNE · Ambiente de testes
-        </div>
-    </main>
-</body>
-</html>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#123E70"><meta name="description" content="Instalador da versão de testes da Escala de Mídia IBNE.">
+<link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="../icons/icone-ibne-app-v3.svg?v=16" type="image/svg+xml"><link rel="apple-touch-icon" href="../icons/icone-ibne.png">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="IBNE Testes">
+<title>Instalar Escala de Mídia IBNE — Testes</title>
+<style>
+*{box-sizing:border-box}body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(135deg,#123E70,#2475D8);color:#17304F}
+.container{width:100%;max-width:420px;padding:32px 24px;background:#fff;border-radius:24px;text-align:center;box-shadow:0 15px 40px #0004}
+.logo{display:block;width:140px;height:140px;margin:0 auto 22px;object-fit:contain}
+h1{color:#123E70;font-size:25px;line-height:1.3;margin:0 0 14px}
+.descricao{font-size:16px;line-height:1.6;margin:0 0 24px;color:#475569}
+.botao{display:block;width:100%;padding:16px 14px;margin-top:12px;border:0;border-radius:14px;background:#1557B0;color:#fff;text-decoration:none;font-family:inherit;font-size:16px;font-weight:bold;line-height:1.4;cursor:pointer}
+.botao:hover{background:#0D438F}.secundario{background:#123E70}.rodape{margin-top:24px;font-size:12px;line-height:1.5;color:#64748B}
+#orientacao{display:none;margin-top:14px;font-size:14px;line-height:1.5;color:#475569}
+</style></head>
+<body><main class="container">
+<img class="logo" src="../icons/icone-ibne-app-v3.svg?v=16" alt="Logotipo da Igreja Batista Nova Esperança">
+<h1>Instalar Escala de Mídia IBNE — Testes</h1>
+<p class="descricao">Acesse com facilidade a versão de testes do aplicativo da equipe de mídia da Igreja Batista Nova Esperança.</p>
+<button class="botao" id="instalar" type="button">⬇️ INSTALAR NO DISPOSITIVO</button>
+<a class="botao secundario" href="https://ibne-escala-midia-teste.streamlit.app/" target="_blank" rel="noopener noreferrer">🔵 ABRIR ESCALA DE MÍDIA IBNE — TESTES</a>
+<p id="orientacao" role="status"></p><div class="rodape">Igreja Batista Nova Esperança — IBNE · Ambiente de testes</div>
+</main>
+<script>
+let promptInstalacao=null;const botao=document.getElementById('instalar');const orientacao=document.getElementById('orientacao');
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();promptInstalacao=e;});
+botao.addEventListener('click',async()=>{if(promptInstalacao){promptInstalacao.prompt();await promptInstalacao.userChoice;promptInstalacao=null;return;}orientacao.style.display='block';orientacao.textContent='No Microsoft Edge, abra o menu ⋯ no canto superior direito e procure “Aplicativos” > “Instalar este site como aplicativo”. Se essa opção não aparecer, o navegador ainda não reconheceu a instalação deste site.';});
+if('serviceWorker'in navigator&&location.protocol==='https:'){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));}
+</script></body></html>
