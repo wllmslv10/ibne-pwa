@@ -6,27 +6,30 @@
 <meta name="theme-color" content="#123e70">
 <meta name="description" content="Instalador da versão de testes da Escala de Mídia IBNE.">
 <link rel="manifest" href="./manifest.webmanifest">
-<link rel="icon" href="../icons/icone-ibne-app-v3.svg?v=14" type="image/svg+xml">
+<link rel="icon" href="../icons/icone-ibne-app-v3.svg?v=16" type="image/svg+xml">
 <title>Escala de Mídia IBNE — Testes</title>
 <style>
 :root{color-scheme:dark;--navy:#123e70;--gold:#e8bd62;--text:#f5f7fb;--muted:#c5d2e1}*{box-sizing:border-box}body{margin:0;min-height:100svh;background:radial-gradient(ellipse at top,#234b74 0,var(--navy) 58%);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;display:grid;place-items:center;padding:22px}.card{width:min(100%,480px);text-align:center;padding:30px 24px;border:1px solid #ffffff24;border-radius:28px;background:#08192a70;box-shadow:0 18px 60px #0003}.logo{width:100px;height:100px;margin:0 auto 18px;display:block}.badge{display:inline-block;color:#15243a;background:var(--gold);border-radius:999px;padding:7px 13px;font-weight:800;font-size:.76rem;letter-spacing:.08em}h1{font-size:clamp(1.7rem,6vw,2.2rem);line-height:1.15;margin:14px 0 8px}p{color:var(--muted);line-height:1.6;margin:12px 0 22px}.button{display:flex;justify-content:center;align-items:center;width:100%;min-height:54px;border-radius:14px;text-decoration:none;font-weight:750;padding:14px 18px;margin-top:12px;border:0;font-size:1rem;cursor:pointer}.primary{background:var(--gold);color:#15243a}.secondary{border:1px solid #ffffff45;color:var(--text);background:#ffffff08}.hint{font-size:.88rem;margin-top:18px;margin-bottom:0}footer{margin-top:22px;color:#9fb1c5;font-size:.78rem}
 </style>
 </head>
 <body><main class="card">
-<img class="logo" src="../icons/icone-ibne-app-v3.svg?v=14" alt="Escala de Mídia IBNE — testes">
+<img class="logo" src="../icons/icone-ibne-app-v3.svg?v=16" alt="Escala de Mídia IBNE — testes">
 <div class="badge">AMBIENTE DE TESTES</div>
 <h1>Escala de Mídia IBNE</h1>
 <p>Instale um acesso separado para testar a versão de testes e suas notificações. O aplicativo oficial e seu instalador não serão alterados.</p>
-<button id="install" class="button primary" hidden>Instalar no dispositivo</button>
+<button id="install" class="button primary" type="button" aria-describedby="install-status">Ver opções de instalação</button>
 <a class="button primary" href="https://ibne-escala-midia-teste.streamlit.app/" target="_blank" rel="noopener noreferrer">Abrir aplicativo de testes</a>
-<button id="instructions" class="button secondary">Como instalar neste celular</button>
-<p class="hint" id="help" hidden>No Chrome, abra o menu ⋮ e escolha <strong>Instalar app</strong> ou <strong>Adicionar à tela inicial</strong>. Se o botão “Instalar no dispositivo” aparecer, você também pode usá-lo.</p>
+<button id="instructions" class="button secondary" type="button" aria-expanded="false" aria-controls="help">Como instalar neste celular</button>
+<p class="hint" id="install-status" role="status" aria-live="polite">A instalação automática não está disponível agora. Toque para ver as opções do Chrome.</p>
+<p class="hint" id="help" hidden>Para instalar no Android, abra esta página no Chrome e use o menu ⋮. Selecione <strong>Instalar app</strong> ou <strong>Adicionar à tela inicial</strong>. Se essas opções não aparecerem, o Chrome ainda não considera esta página instalável neste dispositivo.</p>
 <footer>Atalho exclusivo do ambiente de testes da IBNE.</footer>
 </main>
 <script>
-let installPrompt;const installButton=document.getElementById('install');
-window.addEventListener('beforeinstallprompt',event=>{event.preventDefault();installPrompt=event;installButton.hidden=false;});
-installButton.addEventListener('click',async()=>{if(!installPrompt)return;installPrompt.prompt();await installPrompt.userChoice;installPrompt=null;installButton.hidden=true;});
-document.getElementById('instructions').addEventListener('click',()=>{const help=document.getElementById('help');help.hidden=!help.hidden;});
-if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+let installPrompt;const installButton=document.getElementById('install');const help=document.getElementById('help');const status=document.getElementById('install-status');const instructions=document.getElementById('instructions');
+function showHelp(){help.hidden=false;instructions.setAttribute('aria-expanded','true');help.scrollIntoView({behavior:'smooth',block:'center'});}
+window.addEventListener('beforeinstallprompt',event=>{event.preventDefault();installPrompt=event;installButton.textContent='Instalar no dispositivo';status.textContent='Instalação automática disponível.';});
+window.addEventListener('appinstalled',()=>{installPrompt=null;installButton.disabled=true;installButton.textContent='Aplicativo instalado';status.textContent='O aplicativo foi instalado neste dispositivo.';});
+installButton.addEventListener('click',async()=>{if(!installPrompt){showHelp();return;}try{const promptEvent=installPrompt;installPrompt=null;await promptEvent.prompt();const choice=await promptEvent.userChoice;if(choice?.outcome==='accepted'){status.textContent='Você aceitou a instalação. O Chrome está concluindo o processo.';}else{status.textContent='Instalação cancelada. Você ainda pode usar as opções do menu do Chrome.';showHelp();}}catch(error){status.textContent='Não foi possível abrir a janela de instalação. Use as opções do menu do Chrome.';showHelp();}});
+instructions.addEventListener('click',()=>{if(help.hidden)showHelp();else{help.hidden=true;instructions.setAttribute('aria-expanded','false');}});
+if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'}).catch(()=>{}));
 </script></body></html>
