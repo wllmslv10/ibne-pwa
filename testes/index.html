@@ -1,43 +1,117 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#123e70">
-<meta name="description" content="Instalador da versão de testes da Escala de Mídia IBNE.">
-<link rel="manifest" href="./manifest.webmanifest">
-<link rel="icon" href="../icons/icone-ibne-app-v3.svg?v=16" type="image/svg+xml">
-<title>Escala de Mídia IBNE — Testes</title>
-<style>
-:root{color-scheme:dark;--navy:#123e70;--gold:#e8bd62;--text:#f5f7fb}*{box-sizing:border-box}body{margin:0;min-height:100svh;background:radial-gradient(ellipse at top,#234b74 0,var(--navy) 58%);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;display:grid;place-items:center;padding:22px}.card{width:min(100%,480px);text-align:center;padding:30px 24px;border:1px solid #ffffff24;border-radius:28px;background:#08192a70;box-shadow:0 18px 60px #0003}.logo{width:100px;height:100px;margin:0 auto 18px;display:block}.badge{display:inline-block;color:#15243a;background:var(--gold);border-radius:999px;padding:7px 13px;font-weight:800;font-size:.76rem;letter-spacing:.08em}h1{font-size:clamp(1.7rem,6vw,2.2rem);line-height:1.15;margin:14px 0 8px}p{color:#c5d2e1;line-height:1.6;margin:12px 0 22px}.button{display:flex;justify-content:center;align-items:center;width:100%;min-height:54px;border-radius:14px;text-decoration:none;font-weight:750;padding:14px 18px;margin-top:12px;border:0;font-size:1rem;cursor:pointer}.primary{background:var(--gold);color:#15243a}.button:disabled{opacity:.7;cursor:default}#install-status{font-size:.9rem;margin:14px 0 0;color:#f5f7fb}#install-status[hidden]{display:none}footer{margin-top:22px;color:#9fb1c5;font-size:.78rem}
-</style>
-<script>
-(function(){
-  const app='https://ibne-escala-midia-teste.streamlit.app/';
-  if(window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone===true){
-    window.location.replace(app);
-  }
-})();
-</script>
-</head>
-<body><main class="card">
-<img class="logo" src="../icons/icone-ibne-app-v3.svg?v=16" alt="Escala de Mídia IBNE — testes">
-<div class="badge">AMBIENTE DE TESTES</div>
-<h1>Escala de Mídia IBNE</h1>
-<p>Instale um acesso separado para testar a versão de testes e suas notificações. O aplicativo oficial e seu instalador não serão alterados.</p>
-<button id="install" class="button primary" type="button">Instalar no dispositivo</button>
-<a class="button primary" href="https://ibne-escala-midia-teste.streamlit.app/" target="_blank" rel="noopener noreferrer">Abrir aplicativo de testes</a>
-<p id="install-status" role="status" aria-live="polite" hidden></p>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#123E70">
+    <meta name="description" content="Instalador da versão de testes da Escala de Mídia IBNE.">
+    <title>Instalar Escala de Mídia IBNE — Testes</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
-<footer>Atalho exclusivo do ambiente de testes da IBNE.</footer>
-</main>
-<script>
-const TEST_APP_URL='https://ibne-escala-midia-teste.streamlit.app/';
-if(new URLSearchParams(location.search).get('abrir')==='app'){location.replace(TEST_APP_URL);}
-let installPrompt;const installButton=document.getElementById('install');const status=document.getElementById('install-status');
-function showStatus(message=''){status.textContent=message;status.hidden=!message;}
-window.addEventListener('beforeinstallprompt',event=>{event.preventDefault();installPrompt=event;installButton.textContent='Instalar no dispositivo';showStatus();});
-window.addEventListener('appinstalled',()=>{installPrompt=null;installButton.disabled=true;installButton.textContent='Aplicativo instalado';window.location.replace(TEST_APP_URL);});
-installButton.addEventListener('click',async()=>{if(!installPrompt){showStatus('Instalação automática indisponível. Abra o menu ⋮ do Chrome e escolha Instalar app ou Adicionar à tela inicial.');return;}try{const promptEvent=installPrompt;installPrompt=null;await promptEvent.prompt();const choice=await promptEvent.userChoice;if(choice?.outcome==='accepted'){status.textContent='';}else{status.textContent='';}}catch(error){showStatus('Não foi possível abrir a instalação. Tente novamente ou use o menu ⋮ do Chrome.');}});
-if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'}).catch(()=>{}));
-</script></body></html>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(135deg, #123E70, #2475D8);
+            color: #17304F;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 420px;
+            padding: 32px 24px;
+            background: #FFFFFF;
+            border-radius: 24px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        .logo {
+            display: block;
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 22px;
+            object-fit: contain;
+        }
+
+        h1 {
+            color: #123E70;
+            font-size: 25px;
+            line-height: 1.3;
+            margin: 0 0 14px;
+        }
+
+        .descricao {
+            font-size: 16px;
+            line-height: 1.6;
+            margin: 0 0 24px;
+            color: #475569;
+        }
+
+        .botao {
+            display: block;
+            padding: 17px 14px;
+            border-radius: 14px;
+            background: #1557B0;
+            color: #FFFFFF;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            line-height: 1.4;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .botao:hover {
+            background: #0D438F;
+            transform: translateY(-2px);
+        }
+
+        .rodape {
+            margin-top: 24px;
+            font-size: 12px;
+            color: #64748B;
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="container">
+
+        <img
+            class="logo"
+            src="https://raw.githubusercontent.com/wllmslv10/ibne-pwa/pwa-setup/icons/icone-ibne-app-v3.svg"
+            alt="Logotipo da Igreja Batista Nova Esperança"
+        >
+
+        <h1>Instalar Escala de Mídia IBNE — Testes</h1>
+
+        <p class="descricao">
+            Acesse com facilidade a versão de testes do aplicativo da equipe de mídia
+            da Igreja Batista Nova Esperança.
+        </p>
+
+        <a
+            class="botao"
+            href="https://ibne-escala-midia-teste.streamlit.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            🔵 ABRIR ESCALA DE MÍDIA IBNE — TESTES
+        </a>
+
+        <div class="rodape">
+            Igreja Batista Nova Esperança — IBNE · Ambiente de testes
+        </div>
+
+    </main>
+
+</body>
+</html>
