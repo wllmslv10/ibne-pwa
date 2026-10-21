@@ -10,5 +10,5 @@
   "orientation": "portrait",
   "theme_color": "#123e70",
   "background_color": "#123e70",
-  "icons": [{"src":"../icons/icone-ibne-app-v3.svg?v=14","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+  "icons": [{"src":"../icons/icone-ibne-app-v3.svg?v=15","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
 }
