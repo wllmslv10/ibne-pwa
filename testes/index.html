@@ -19,17 +19,16 @@
 <p>Instale um acesso separado para testar a versão de testes e suas notificações. O aplicativo oficial e seu instalador não serão alterados.</p>
 <button id="install" class="button primary" type="button" aria-describedby="install-status">Ver opções de instalação</button>
 <a class="button primary" href="https://ibne-escala-midia-teste.streamlit.app/" target="_blank" rel="noopener noreferrer">Abrir aplicativo de testes</a>
-<button id="instructions" class="button secondary" type="button" aria-expanded="false" aria-controls="help">Como instalar neste celular</button>
-<p class="hint" id="install-status" role="status" aria-live="polite">A instalação automática não está disponível agora. Toque para ver as opções do Chrome.</p>
-<p class="hint" id="help" hidden>Para instalar no Android, abra esta página no Chrome e use o menu ⋮. Selecione <strong>Instalar app</strong> ou <strong>Adicionar à tela inicial</strong>. Se essas opções não aparecerem, o Chrome ainda não considera esta página instalável neste dispositivo.</p>
+<p class="hint" id="install-status" role="status" aria-live="polite">Se a instalação não abrir automaticamente, use o menu ⋮ do Chrome.</p>
 <footer>Atalho exclusivo do ambiente de testes da IBNE.</footer>
 </main>
 <script>
-let installPrompt;const installButton=document.getElementById('install');const help=document.getElementById('help');const status=document.getElementById('install-status');const instructions=document.getElementById('instructions');
-function showHelp(){help.hidden=false;instructions.setAttribute('aria-expanded','true');help.scrollIntoView({behavior:'smooth',block:'center'});}
+const TEST_APP_URL='https://ibne-escala-midia-teste.streamlit.app/';
+// O ícone instalado abre diretamente o aplicativo de testes, não esta página de instalação.
+if(new URLSearchParams(location.search).get('abrir')==='app'){location.replace(TEST_APP_URL);}
+let installPrompt;const installButton=document.getElementById('install');const status=document.getElementById('install-status');
 window.addEventListener('beforeinstallprompt',event=>{event.preventDefault();installPrompt=event;installButton.textContent='Instalar no dispositivo';status.textContent='Instalação automática disponível.';});
 window.addEventListener('appinstalled',()=>{installPrompt=null;installButton.disabled=true;installButton.textContent='Aplicativo instalado';status.textContent='O aplicativo foi instalado neste dispositivo.';});
-installButton.addEventListener('click',async()=>{if(!installPrompt){showHelp();return;}try{const promptEvent=installPrompt;installPrompt=null;await promptEvent.prompt();const choice=await promptEvent.userChoice;if(choice?.outcome==='accepted'){status.textContent='Você aceitou a instalação. O Chrome está concluindo o processo.';}else{status.textContent='Instalação cancelada. Você ainda pode usar as opções do menu do Chrome.';showHelp();}}catch(error){status.textContent='Não foi possível abrir a janela de instalação. Use as opções do menu do Chrome.';showHelp();}});
-instructions.addEventListener('click',()=>{if(help.hidden)showHelp();else{help.hidden=true;instructions.setAttribute('aria-expanded','false');}});
+installButton.addEventListener('click',async()=>{if(!installPrompt){status.textContent='Instalação automática indisponível. Abra o menu ⋮ do Chrome e escolha Instalar app ou Adicionar à tela inicial.';return;}try{const promptEvent=installPrompt;installPrompt=null;await promptEvent.prompt();const choice=await promptEvent.userChoice;if(choice?.outcome==='accepted'){status.textContent='Você aceitou a instalação. O Chrome está concluindo o processo.';}else{status.textContent='Instalação cancelada. Você pode tentar novamente pelo botão.';}}catch(error){status.textContent='Não foi possível abrir a instalação. Tente novamente ou use o menu ⋮ do Chrome.';}});
 if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'}).catch(()=>{}));
 </script></body></html>
