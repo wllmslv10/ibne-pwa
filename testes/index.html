@@ -25,7 +25,7 @@
 <script>
 const TEST_APP_URL='https://ibne-escala-midia-teste.streamlit.app/';
 // O ícone instalado abre diretamente o aplicativo de testes, não esta página de instalação.
-if(new URLSearchParams(location.search).get('abrir')==='app'){location.replace(TEST_APP_URL);}
+if(new URLSearchParams(location.search).get('abrir')==='app'||window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone===true){location.replace(TEST_APP_URL);}
 let installPrompt;const installButton=document.getElementById('install');const status=document.getElementById('install-status');
 window.addEventListener('beforeinstallprompt',event=>{event.preventDefault();installPrompt=event;installButton.textContent='Instalar no dispositivo';status.textContent='Instalação automática disponível.';});
 window.addEventListener('appinstalled',()=>{installPrompt=null;installButton.disabled=true;installButton.textContent='Aplicativo instalado';status.textContent='O aplicativo foi instalado neste dispositivo.';});
